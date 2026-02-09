@@ -40,8 +40,7 @@ func main() {
 
 	for _, file := range jsFiles {
 		content, _ := os.ReadFile(file)
-		category := filepath.Base(file)
-		jsQuestions = append(jsQuestions, parseMarkdown(string(content), category)...)
+		jsQuestions = append(jsQuestions, parseMarkdown(string(content), "JS")...)
 	}
 
 	fmt.Println("⚙️ Parsing React...")
@@ -50,8 +49,7 @@ func main() {
 
 	for _, file := range reactFiles {
 		content, _ := os.ReadFile(file)
-		category := filepath.Base(file)
-		reactQuestions = append(reactQuestions, parseMarkdown(string(content), category)...)
+		reactQuestions = append(reactQuestions, parseMarkdown(string(content), "React")...)
 	}
 
 	writeTypes()

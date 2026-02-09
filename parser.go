@@ -6,6 +6,7 @@ import (
 
 	"github.com/gomarkdown/markdown"
 	"github.com/gomarkdown/markdown/ast"
+	"github.com/google/uuid"
 )
 
 func parseMarkdown(content string, category string) []Question {
@@ -13,7 +14,6 @@ func parseMarkdown(content string, category string) []Question {
 	root := markdown.Parse(md, nil)
 
 	var questions []Question
-	id := 1
 
 	// função recursiva para percorrer o AST
 	var walk func(node ast.Node)
@@ -29,15 +29,12 @@ func parseMarkdown(content string, category string) []Question {
 						q := normalizeQuestion(text)
 						exp := buildSeniorExplanation(q)
 						questions = append(questions, Question{
-							ID:          id,
+							ID:          uuid.New(),
 							Question:    q,
 							Explanation: normalizeExplanation(exp),
 							Example:     example,
-							Category:    category,
-							Level:       "senior",
-							Eliminatory: isEliminatory(q),
+							Category:    Category(category),
 						})
-						id++
 					}
 				}
 			}
@@ -49,15 +46,12 @@ func parseMarkdown(content string, category string) []Question {
 					q := normalizeQuestion(text)
 					exp := buildSeniorExplanation(q)
 					questions = append(questions, Question{
-						ID:          id,
+						ID:          uuid.New(),
 						Question:    q,
 						Explanation: normalizeExplanation(exp),
 						Example:     "", // exemplos podem vir nos próximos nós
-						Category:    category,
-						Level:       "senior",
-						Eliminatory: isEliminatory(q),
+						Category:    Category(category),
 					})
-					id++
 				}
 			}
 		}

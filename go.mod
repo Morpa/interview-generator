@@ -2,4 +2,7 @@ module interview-generator
 
 go 1.21.6
 
-require github.com/gomarkdown/markdown v0.0.0-20250810172220-2e2c11897d1a
+require (
+	github.com/gomarkdown/markdown v0.0.0-20250810172220-2e2c11897d1a
+	github.com/google/uuid v1.6.0
+)
